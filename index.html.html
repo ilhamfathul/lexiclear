@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aku Bisa Membaca — Belajar Membaca Secara Bertahap</title>
+  <meta name="description" content="Website pendamping buku belajar membaca dengan Metode Suku Kata dan typeface LexiClear untuk siswa dengan gejala awal disleksia.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preload" href="./LexiClear-Regular.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="./LexiClear-Bold.woff" as="font" type="font/woff" crossorigin>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <style>
+    
+    /* LexiClear webfont */
+    @font-face {
+      font-family: 'LexiClear';
+      src: url('./LexiClear-Regular.woff') format('woff');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'LexiClear';
+      src: url('./LexiClear-Bold.woff') format('woff');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --cream: #F6F0DE;
+      --blue: #6E97C4;
+      --soft-blue: #AFC6DB;
+      --green: #3CAB6E;
+      --sage: #88A98A;
+      --yellow: #F2EB67;
+      --peach-soft: #FFD4BE;
+      --peach: #ECA08F;
+      --red: #E53E45;
+      --dark-red: #B93C43;
+      --dark-gray: #333333;
+      --med-gray: #666666;
+      --light-gray: #E8E8E8;
+      --white: #FFFFFF;
+    }
+    
+    * { -webkit-font-smoothing: antialiased; }
+    
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: var(--cream);
+      color: var(--dark-gray);
+      line-height: 1.8;
+      letter-spacing: 0.01em;
+      overflow-x: hidden;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Fredoka', sans-serif;
+      letter-spacing: 0.005em;
+      line-height: 1.2;
+    }
+    
+    /* Background texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(175, 198, 219, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(136, 169, 138, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(242, 235, 103, 0.06) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    main { position: relative; z-index: 1; }
+    
+    /* Card */
+    .card-soft {
+      background: var(--white);
+      border-radius: 1.75rem;
+      box-shadow: 0 4px 30px -10px rgba(51, 51, 51, 0.08), 0 2px 8px -4px rgba(51, 51, 51, 0.04);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s ease;
+    }
+    
+    .card-soft:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 40px -10px rgba(51, 51, 51, 0.14), 0 4px 16px -4px rgba(51, 51, 51, 0.06);
+    }
+    
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.875rem 2rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      font-family: 'Nunito', sans-serif;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      border: none;
+      font-size: 1.0625rem;
+    }
+    
+    .btn-primary {
+      background-color: var(--green);
+      color: var(--white);
+      box-shadow: 0 6px 20px -4px rgba(60, 171, 110, 0.45);
+    }
+    
+    .btn-primary:hover {
+      background-color: #2d8a55;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px -4px rgba(60, 171, 110, 0.55);
+    }
+    
+    .btn-secondary {
+      background-color: var(--peach);
+      color: var(--dark-gray);
+      box-shadow: 0 6px 20px -4px rgba(236, 160, 143, 0.45);
+    }
+    
+    .btn-secondary:hover {
+      background-color: #e88a76;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px -4px rgba(236, 160, 143, 0.55);
+    }
+    
+    .btn-nav {
+      background-color: var(--blue);
+      color: var(--white);
+      padding: 0.75rem 1.5rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 14px -2px rgba(110, 151, 196, 0.4);
+    }
+    
+    .btn-nav:hover {
+      background-color: #5a85b8;
+      transform: translateY(-2px);
+    }
+    
+    .btn-nav:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    /* Audio button */
+    .audio-btn {
+      background: var(--soft-blue);
+      color: var(--blue);
+      border-radius: 9999px;
+      padding: 0.875rem 1.75rem;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.625rem;
+      border: none;
+      cursor: pointer;
+      font-size: 1.0625rem;
+      font-family: 'Nunito', sans-serif;
+    }
+    
+    .audio-btn:hover {
+      background: var(--blue);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px -4px rgba(110, 151, 196, 0.5);
+    }
+    
+    .audio-btn.playing {
+      background: var(--green);
+      color: white;
+    }
+    
+    /* Sound wave animation */
+    .sound-wave {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      height: 18px;
+    }
+    
+    .sound-wave span {
+      display: block;
+      width: 3px;
+      background: currentColor;
+      border-radius: 2px;
+      height: 100%;
+      transform: scaleY(0.3);
+      transition: transform 0.2s ease;
+    }
+    
+    .audio-btn.playing .sound-wave span {
+      animation: wave 0.9s ease-in-out infinite;
+    }
+    
+    .sound-wave span:nth-child(1) { animation-delay: 0s; }
+    .sound-wave span:nth-child(2) { animation-delay: 0.15s; }
+    .sound-wave span:nth-child(3) { animation-delay: 0.3s; }
+    .sound-wave span:nth-child(4) { animation-delay: 0.45s; }
+    .sound-wave span:nth-child(5) { animation-delay: 0.6s; }
+    
+    @keyframes wave {
+      0%, 100% { transform: scaleY(0.3); }
+      50% { transform: scaleY(1); }
+    }
+    
+    /* Tabs */
+    .tab-btn {
+      padding: 0.625rem 1.25rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      background: var(--white);
+      color: var(--med-gray);
+      border: 2px solid transparent;
+      cursor: pointer;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.9375rem;
+      white-space: nowrap;
+      box-shadow: 0 2px 8px -2px rgba(51, 51, 51, 0.06);
+    }
+    
+    .tab-btn:hover {
+      color: var(--blue);
+      border-color: var(--soft-blue);
+    }
+    
+    .tab-btn.active {
+      background: var(--blue);
+      color: var(--white);
+      box-shadow: 0 4px 16px -2px rgba(110, 151, 196, 0.5);
+    }
+    
+    /* Navigation */
+    .nav-link {
+      color: var(--med-gray);
+      font-weight: 700;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      transition: all 0.3s ease;
+      font-size: 0.9375rem;
+    }
+    
+    .nav-link:hover {
+      color: var(--blue);
+      background: rgba(110, 151, 196, 0.12);
+    }
+    
+    /* Big letter display */
+    .big-letter {
+      font-family: 'LexiClear', sans-serif;
+      font-weight: 400;
+      font-synthesis: none;
+      line-height: 1;
+      color: var(--dark-gray);
+    }
+    
+    /* Float animation */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+    }
+    
+    .float-anim { animation: float 5s ease-in-out infinite; }
+    .float-anim-2 { animation: float 6s ease-in-out infinite 1s; }
+    .float-anim-3 { animation: float 7s ease-in-out infinite 2s; }
+    
+    /* Reveal on scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Timeline horizontal scroll */
+    .timeline-scroll {
+      scrollbar-width: thin;
+      scrollbar-color: var(--soft-blue) transparent;
+    }
+    
+    .timeline-scroll::-webkit-scrollbar {
+      height: 8px;
+    }
+    
+    .timeline-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    
+    .timeline-scroll::-webkit-scrollbar-thumb {
+      background: var(--soft-blue);
+      border-radius: 4px;
+    }
+    
+    /* Focus visible */
+    *:focus-visible {
+      outline: 3px solid var(--blue);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+    
+    /* Mobile menu */
+    .mobile-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    
+    .mobile-menu.open {
+      max-height: 400px;
+    }
+    
+    /* Type specimen */
+    .type-specimen {
+      font-family: 'LexiClear', sans-serif;
+      font-weight: 400;
+      font-synthesis: none;
+      letter-spacing: 0.02em;
+    }
+    
+    /* Letter card hover */
+    .letter-bg-circle {
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(175, 198, 219, 0.35) 0%, rgba(242, 235, 103, 0.12) 50%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+    }
+    
+    @media (max-width: 768px) {
+      .letter-bg-circle {
+        width: 200px;
+        height: 200px;
+      }
+    }
+    
+    /* Progress dots */
+    .progress-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--light-gray);
+      transition: all 0.3s ease;
+    }
+    
+    .progress-dot.active {
+      background: var(--blue);
+      width: 28px;
+      border-radius: 4px;
+    }
+    
+    html { scroll-behavior: smooth; }
+    
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 backdrop-blur-md" style="background: rgba(246, 240, 222, 0.85); border-bottom: 1px solid rgba(232, 232, 232, 0.6);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 md:h-20">
+        
+        <!-- Logo Website (Kiri) -->
+        <a href="#beranda" class="flex items-center gap-2.5">
+          <div class="w-10 h-10 md:w-12 md:h-12 rounded-2xl flex items-center justify-center" style="background: linear-gradient(135deg, var(--blue), var(--green));">
+            <span class="text-white font-bold text-lg md:text-xl" style="font-family: 'Fredoka', sans-serif;">A</span>
+          </div>
+          <div class="hidden sm:block">
+            <div class="font-bold text-base md:text-lg leading-tight" style="color: var(--dark-gray); font-family: 'Fredoka', sans-serif;">Aku Bisa Membaca</div>
+            <div class="text-xs leading-tight" style="color: var(--med-gray);">Belajar Membaca Secara Bertahap</div>
+          </div>
+        </a>
+        
+        <!-- Navigasi Tengah -->
+        <div class="hidden lg:flex items-center gap-1">
+          <a href="#beranda" class="nav-link">Beranda</a>
+          <a href="#materi" class="nav-link">Materi</a>
+          <a href="#lexiclear" class="nav-link">LexiClear</a>
+          <a href="#tentang-buku" class="nav-link">Tentang Buku</a>
+          <a href="#timeline" class="nav-link">Timeline</a>
+        </div>
+        
+          <!-- Bagian Kanan (Tombol Mulai Belajar + Logo Institusi) -->
+        <div class="flex items-center gap-0 md:gap-10">
+          
+          <!-- Tombol Mulai Belajar (Desktop) -->
+          <a href="#materi" class="hidden lg:inline-flex btn btn-primary text-sm" style="padding: 0.625rem 1.5rem;">
+            Mulai Belajar
+          </a>
+          
+          <!-- 2 Logo Institusi (UPI & Prodi) -->
+          <div class="hidden md:flex items-center gap-7">
+            <!-- Ganti src dengan nama file logo UPI kamu -->
+            <img src="Logo-UPI-HKI-ok.png" alt="Universitas Pendidikan Indonesia" class="h-10 md:h-12 w-auto object-contain">
+            <!-- Ganti src dengan nama file logo Prodi kamu -->
+            <img src="Logo-Prodi.png" alt="Logo Prodi" class="h-10 md:h-12 w-auto object-contain">
+          </div>
+          
+          <!-- Tombol Menu Mobile -->
+          <button id="mobileMenuBtn" class="lg:hidden p-2 rounded-xl" style="color: var(--dark-gray);" aria-label="Buka menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <line x1="4" y1="7" x2="20" y2="7"/>
+              <line x1="4" y1="12" x2="20" y2="12"/>
+              <line x1="4" y1="17" x2="20" y2="17"/>
+            </svg>
+          </button>
+          
+        </div>
+      
+      <!-- Mobile Menu -->
+      <div id="mobileMenu" class="mobile-menu lg:hidden">
+        <div class="py-3 space-y-1">
+          <a href="#beranda" class="nav-link block">Beranda</a>
+          <a href="#materi" class="nav-link block">Materi</a>
+          <a href="#lexiclear" class="nav-link block">LexiClear</a>
+          <a href="#tentang-buku" class="nav-link block">Tentang Buku</a>
+          <a href="#timeline" class="nav-link block">Timeline</a>
+          <a href="#materi" class="btn btn-primary w-full mt-3">Mulai Belajar</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    
+    <!-- Hero Section -->
+    <section id="beranda" class="relative overflow-hidden pt-12 pb-16 md:pt-20 md:pb-24">
+      
+      <!-- Decorative background shapes -->
+      <div class="absolute top-20 left-10 w-32 h-32 rounded-full opacity-30 float-anim" style="background: var(--yellow); filter: blur(8px);"></div>
+      <div class="absolute bottom-10 right-20 w-40 h-40 rounded-full opacity-20 float-anim-2" style="background: var(--peach-soft); filter: blur(12px);"></div>
+      <div class="absolute top-40 right-10 w-24 h-24 rounded-full opacity-25 float-anim-3" style="background: var(--sage); filter: blur(6px);"></div>
+      
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          
+          <!-- Left: Text -->
+          <div class="text-center lg:text-left order-2 lg:order-1">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6" style="background: rgba(60, 171, 110, 0.12);">
+              <span class="w-2 h-2 rounded-full" style="background: var(--green);"></span>
+              <span class="text-sm font-bold" style="color: var(--green);">Media Pendamping Buku</span>
+            </div>
+            
+            <!-- Gambar Judul -->
+            <img src="text-aku-bisa-membaca.png.png" alt="Aku Bisa Membaca - Belajar Membaca Secara Bertahap" class="w-full max-w-xs md:max-w-md lg:max-w-lg mb-6 mx-auto lg:mx-0">
+            
+            <p class="text-base md:text-lg mb-8 max-w-xl mx-auto lg:mx-0" style="color: var(--med-gray); line-height: 1.8;">
+              Website ini merupakan pendamping buku belajar membaca yang disusun menggunakan Metode Suku Kata dan typeface LexiClear. Website menyediakan materi digital dan audio pelafalan untuk mendukung proses belajar membaca secara bertahap.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+              <a href="#materi" class="btn btn-primary">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+                Mulai Belajar
+              </a>
+              <a href="#tentang-buku" class="btn btn-secondary">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                </svg>
+                Tentang Buku
+              </a>
+            </div>
+          </div>
+          
+          <!-- Right: Illustration -->
+          <div class="order-1 lg:order-2 relative">
+            <div class="relative max-w-lg mx-auto">
+              
+              <!-- Background circle -->
+              <div class="absolute inset-0 rounded-[3rem] opacity-40" style="background: radial-gradient(circle at 50% 50%, var(--soft-blue), transparent 70%);"></div>
+                            <!-- Ilustrasi Gambar -->
+              <img src="sketsa-karakter.png.png" alt="Guru dan siswa sedang membaca buku" class="w-full h-auto relative rounded-[2rem] shadow-2xl object-cover">
+             
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+    
+    <!-- Materi Section -->
+    <section id="materi" class="py-16 md:py-24 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section header -->
+        <div class="text-center mb-12 reveal">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-4" style="background: rgba(110, 151, 196, 0.12);">
+            <span class="text-sm font-bold" style="color: var(--blue);">Materi Pembelajaran</span>
+          </div>
+          <h2 class="text-3xl md:text-5xl font-bold mb-4" style="color: var(--dark-gray);">
+            Belajar Membaca <span style="color: var(--green);">Bertahap</span>
+          </h2>
+          <p class="text-base md:text-lg max-w-2xl mx-auto" style="color: var(--med-gray);">
+            Pilih kategori materi di bawah ini. Setiap materi dilengkapi dengan audio pelafalan untuk membantu siswa memahami bunyi huruf, suku kata, kata, kalimat, dan cerita pendek.
+          </p>
+        </div>
+        
+        <!-- Tabs -->
+        <div class="flex flex-wrap justify-center gap-2 mb-8 reveal">
+          <button class="tab-btn active" data-tab="vokal">Huruf Vokal</button>
+          <button class="tab-btn" data-tab="konsonan">Huruf Konsonan</button>
+          <button class="tab-btn" data-tab="suku">Suku Kata</button>
+          <button class="tab-btn" data-tab="kata">Kata</button>
+          <button class="tab-btn" data-tab="kalimat">Kalimat</button>
+          <button class="tab-btn" data-tab="cerita">Cerita Pendek</button>
+        </div>
+        
+        <!-- Materi Display Card -->
+        <div class="card-soft p-6 md:p-12 reveal">
+          <div class="flex flex-col items-center">
+            
+            <!-- Category label -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6" style="background: rgba(60, 171, 110, 0.12);">
+              <span class="w-2 h-2 rounded-full" style="background: var(--green);"></span>
+              <span id="materiCategory" class="text-sm font-bold" style="color: var(--green);">Huruf Vokal</span>
+            </div>
+            
+            <!-- Content display area -->
+            <div class="relative w-full flex items-center justify-center min-h-[280px] md:min-h-[340px] mb-6">
+              <div class="letter-bg-circle"></div>
+              <div id="materiContent" class="relative z-10 text-center">
+                <!-- Content injected by JS -->
+              </div>
+            </div>
+            
+            <!-- Progress -->
+            <div id="materiProgress" class="flex items-center gap-2 mb-6">
+              <!-- Progress dots injected by JS -->
+            </div>
+            
+            <!-- Controls -->
+            <div class="flex flex-wrap items-center justify-center gap-3">
+              <button id="prevBtn" class="btn-nav flex items-center gap-2" style="background: var(--white); color: var(--blue); border: 2px solid var(--soft-blue); box-shadow: none;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 18 9 12 15 6"/>
+                </svg>
+                Sebelumnya
+              </button>
+              
+              <button id="audioBtn" class="audio-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
+                  <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
+                </svg>
+                <span id="audioBtnText">Dengarkan Pelafalan</span>
+                <div class="sound-wave" style="display: none;">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+              </button>
+              
+              <button id="nextBtn" class="btn-nav flex items-center gap-2" style="background: var(--white); color: var(--blue); border: 2px solid var(--soft-blue); box-shadow: none;">
+                Berikutnya
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"/>
+                </svg>
+              </button>
+            </div>
+            
+          </div>
+        </div>
+        
+      </div>
+    </section>
+    
+    <!-- LexiClear Section -->
+    <section id="lexiclear" class="py-16 md:py-24 relative" style="background: linear-gradient(180deg, rgba(175, 198, 219, 0.12) 0%, transparent 100%);">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+          
+          <!-- Left: Text -->
+          <div class="reveal">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-4" style="background: rgba(236, 160, 143, 0.15);">
+              <span class="text-sm font-bold" style="color: var(--dark-red);">Typeface Khusus</span>
+            </div>
+            
+            <h2 class="text-3xl md:text-5xl font-bold mb-6" style="color: var(--dark-gray);">
+              Lexi<span style="color: var(--blue);">Clear</span>
+            </h2>
+            
+            <div class="space-y-4 text-base md:text-lg" style="color: var(--med-gray); line-height: 1.8;">
+              <p>
+                LexiClear merupakan typeface manuscript yang dikembangkan berdasarkan hasil penelitian mengenai keterbacaan teks bagi siswa dengan gejala awal disleksia. Typeface ini dirancang dengan mempertimbangkan bentuk huruf yang sederhana, jelas, dan mudah dikenali sehingga dapat membantu proses membaca permulaan.
+              </p>
+              <p>
+                Pemilihan bentuk huruf didasarkan pada hasil penelitian yang menunjukkan bahwa typeface manuscript memberikan hasil membaca yang lebih baik dibandingkan typeface semi-cursive pada partisipan penelitian. Oleh karena itu, LexiClear diimplementasikan sebagai typeface utama pada buku Aku Bisa Membaca agar penyajian materi menjadi lebih nyaman, konsisten, dan mudah dipahami.
+              </p>
+              <p>
+                Pengembangan LexiClear tidak hanya bertujuan menghasilkan typeface yang memiliki keterbacaan tinggi, tetapi juga menjadi bentuk implementasi hasil penelitian ke dalam media yang dapat dimanfaatkan oleh guru, orang tua, maupun siswa.
+              </p>
+            </div>
+          </div>
+          
+          <!-- Right: Type Specimen & Anatomy -->
+          <div class="reveal">
+            <div class="card-soft p-6 md:p-8">
+              
+              <!-- Type specimen header -->
+              <div class="flex items-center justify-between mb-6">
+                <div>
+                  <div class="text-xs font-bold uppercase tracking-wider mb-1" style="color: var(--med-gray);">Type Specimen</div>
+                  <div class="text-xl font-bold" style="color: var(--dark-gray); font-family: 'Fredoka', sans-serif;">LexiClear</div>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="px-3 py-1 rounded-full text-xs font-bold" style="background: rgba(60, 171, 110, 0.15); color: var(--green);">Manuscript</span>
+                </div>
+              </div>
+              
+              <!-- Alphabet display -->
+              <div class="rounded-2xl p-5 mb-6" style="background: var(--cream);">
+                <div class="type-specimen text-2xl md:text-3xl text-center mb-3" style="color: var(--dark-gray); letter-spacing: 0.15em;">
+                  A B C D E F G H I
+                </div>
+                <div class="type-specimen text-2xl md:text-3xl text-center mb-3" style="color: var(--dark-gray); letter-spacing: 0.15em;">
+                  J K L M N O P Q R
+                </div>
+                <div class="type-specimen text-2xl md:text-3xl text-center" style="color: var(--dark-gray); letter-spacing: 0.15em;">
+                  S T U V W X Y Z
+                </div>
+              </div>
+              
+              <!-- Sample words -->
+              <div class="grid grid-cols-3 gap-3 mb-6">
+                <div class="text-center p-3 rounded-2xl" style="background: rgba(175, 198, 219, 0.2);">
+                  <div class="type-specimen text-2xl font-bold mb-1" style="color: var(--blue);">ba</div>
+                  <div class="text-xs" style="color: var(--med-gray);">suku kata</div>
+                </div>
+                <div class="text-center p-3 rounded-2xl" style="background: rgba(136, 169, 138, 0.2);">
+                  <div class="type-specimen text-2xl font-bold mb-1" style="color: var(--green);">buku</div>
+                  <div class="text-xs" style="color: var(--med-gray);">kata</div>
+                </div>
+                <div class="text-center p-3 rounded-2xl" style="background: rgba(236, 160, 143, 0.2);">
+                  <div class="type-specimen text-xl font-bold mb-1" style="color: var(--dark-red);">aku baca</div>
+                  <div class="text-xs" style="color: var(--med-gray);">kalimat</div>
+                </div>
+              </div>
+              
+              <!-- Letter anatomy -->
+              <div class="rounded-2xl p-5" style="background: var(--cream);">
+                <div class="text-xs font-bold uppercase tracking-wider mb-3" style="color: var(--med-gray);">Anatomi Huruf</div>
+                <div class="flex items-center justify-center gap-6">
+                  <!-- Letter anatomy SVG -->
+                  <svg viewBox="0 0 160 180" xmlns="http://www.w3.org/2000/svg" class="w-32 h-36">
+                    <!-- Guide lines -->
+                    <line x1="10" y1="20" x2="150" y2="20" stroke="#AFC6DB" stroke-width="1" stroke-dasharray="3,3"/>
+                    <line x1="10" y1="70" x2="150" y2="70" stroke="#AFC6DB" stroke-width="1" stroke-dasharray="3,3"/>
+                    <line x1="10" y1="150" x2="150" y2="150" stroke="#AFC6DB" stroke-width="1" stroke-dasharray="3,3"/>
+                    
+                    <!-- Letter 'b' -->
+                    <path d="M 50 20 L 50 150 M 50 80 Q 50 70 60 70 Q 80 70 80 90 Q 80 110 60 110 Q 50 110 50 100" 
+                          stroke="#333333" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    
+                    <!-- Labels -->
+                    <text x="100" y="25" font-family="Nunito" font-size="9" font-weight="700" fill="#6E97C4">Ascender</text>
+                    <line x1="95" y1="22" x2="55" y2="22" stroke="#6E97C4" stroke-width="1"/>
+                    
+                    <text x="100" y="75" font-family="Nunito" font-size="9" font-weight="700" fill="#3CAB6E">x-height</text>
+                    <line x1="95" y1="72" x2="65" y2="72" stroke="#3CAB6E" stroke-width="1"/>
+                    
+                    <text x="100" y="155" font-family="Nunito" font-size="9" font-weight="700" fill="#ECA08F">Baseline</text>
+                    <line x1="95" y1="152" x2="55" y2="152" stroke="#ECA08F" stroke-width="1"/>
+                  </svg>
+                  
+                  <div class="space-y-2 text-sm" style="color: var(--med-gray);">
+                    <div class="flex items-center gap-2">
+                      <span class="w-3 h-0.5" style="background: var(--blue);"></span>
+                      <span>Bentuk sederhana</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span class="w-3 h-0.5" style="background: var(--green);"></span>
+                      <span>Proporsi seimbang</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span class="w-3 h-0.5" style="background: var(--peach);"></span>
+                      <span>Garis dasar jelas</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+    
+    <!-- Tentang Buku Section -->
+    <section id="tentang-buku" class="py-16 md:py-24 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+          
+          <!-- Left: Book Mockup -->
+          <div class="reveal order-2 lg:order-1">
+            <div class="relative max-w-md mx-auto">
+              
+              <!-- Background decoration -->
+              <div class="absolute inset-0 rounded-[3rem] opacity-30" style="background: radial-gradient(circle, var(--yellow), transparent 60%);"></div>
+              
+              <!-- Cover Buku Asli -->
+              <img src="cover-buku-fix-bismillah.PNG" alt="Cover Buku Aku Bisa Membaca" class="w-full h-auto relative rounded-2xl shadow-xl object-cover">
+              
+              <!-- Floating badge -->
+              <div class="absolute -top-4 -right-4 md:-right-8 card-soft px-4 py-3 flex items-center gap-2 float-anim">
+                <div class="w-8 h-8 rounded-full flex items-center justify-center" style="background: rgba(60, 171, 110, 0.15);">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3CAB6E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="text-xs font-bold" style="color: var(--dark-gray);">Buku Cetakan</div>
+                  <div class="text-xs" style="color: var(--med-gray);">Metode Suku Kata</div>
+                </div>
+              </div>
+              
+            </div>
+          </div>          
+          <!-- Right: Text -->
+          <div class="reveal order-1 lg:order-2">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-4" style="background: rgba(60, 171, 110, 0.12);">
+              <span class="text-sm font-bold" style="color: var(--green);">Tentang Buku</span>
+            </div>
+            
+            <h2 class="text-3xl md:text-5xl font-bold mb-6" style="color: var(--dark-gray);">
+              Aku Bisa <span style="color: var(--blue);">Membaca</span>
+            </h2>
+            
+            <div class="space-y-4 text-base md:text-lg" style="color: var(--med-gray); line-height: 1.8;">
+              <p>
+                <span style="color: var(--dark-gray); font-weight: 700;">Aku Bisa Membaca: Belajar Membaca Secara Bertahap</span> merupakan buku belajar membaca yang disusun menggunakan Metode Suku Kata. Materi disajikan secara bertahap mulai dari pengenalan huruf, suku kata, kata, kalimat, hingga cerita pendek sehingga anak dapat mengembangkan kemampuan membaca secara sistematis.
+              </p>
+              <p>
+                Buku ini merupakan luaran penelitian mengenai perbandingan penggunaan typeface manuscript dan semi-cursive terhadap kemampuan membaca siswa dengan gejala awal disleksia. Seluruh isi buku menggunakan typeface LexiClear sebagai implementasi hasil penelitian.
+              </p>
+              <p>
+                Website ini hadir sebagai media pendamping yang melengkapi buku melalui penyediaan audio pelafalan dan materi digital sehingga proses belajar membaca dapat dilakukan dengan lebih interaktif oleh siswa, guru, maupun orang tua.
+              </p>
+            </div>
+            
+            <!-- Feature highlights -->
+            <div class="grid grid-cols-3 gap-3 mt-8">
+              <div class="card-soft p-4 text-center">
+                <div class="w-10 h-10 rounded-xl mx-auto mb-2 flex items-center justify-center" style="background: rgba(110, 151, 196, 0.15);">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6E97C4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                  </svg>
+                </div>
+                <div class="text-xs font-bold" style="color: var(--dark-gray);">Metode</div>
+                <div class="text-xs" style="color: var(--med-gray);">Suku Kata</div>
+              </div>
+              <div class="card-soft p-4 text-center">
+                <div class="w-10 h-10 rounded-xl mx-auto mb-2 flex items-center justify-center" style="background: rgba(60, 171, 110, 0.15);">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3CAB6E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="4 7 4 4 20 4 20 7"/>
+                    <line x1="9" y1="20" x2="15" y2="20"/>
+                    <line x1="12" y1="4" x2="12" y2="20"/>
+                  </svg>
+                </div>
+                <div class="text-xs font-bold" style="color: var(--dark-gray);">Typeface</div>
+                <div class="text-xs" style="color: var(--med-gray);">LexiClear</div>
+              </div>
+              <div class="card-soft p-4 text-center">
+                <div class="w-10 h-10 rounded-xl mx-auto mb-2 flex items-center justify-center" style="background: rgba(236, 160, 143, 0.2);">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ECA08F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
+                    <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/>
+                  </svg>
+                </div>
+                <div class="text-xs font-bold" style="color: var(--dark-gray);">Media</div>
+                <div class="text-xs" style="color: var(--med-gray);">Audio Digital</div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+    
+    <!-- Timeline Section -->
+    <section id="timeline" class="py-16 md:py-24 relative" style="background: linear-gradient(180deg, transparent 0%, rgba(136, 169, 138, 0.08) 50%, transparent 100%);">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center mb-12 reveal">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-4" style="background: rgba(136, 169, 138, 0.18);">
+            <span class="text-sm font-bold" style="color: var(--sage);">Penelitian & Pengembangan</span>
+          </div>
+          <h2 class="text-3xl md:text-5xl font-bold mb-4" style="color: var(--dark-gray);">
+            Timeline <span style="color: var(--sage);">Penelitian</span>
+          </h2>
+          <p class="text-base md:text-lg max-w-2xl mx-auto" style="color: var(--med-gray);">
+            Perjalanan pengembangan typeface LexiClear dan buku Aku Bisa Membaca dari identifikasi permasalahan hingga website pendamping.
+          </p>
+        </div>
+        
+        <!-- Timeline horizontal scroll -->
+        <div class="reveal">
+          <div class="timeline-scroll overflow-x-auto pb-6">
+            <div class="flex gap-4 md:gap-6 min-w-max px-2">
+              
+              <!-- Step 1 -->
+              <div class="flex items-stretch">
+                <div class="card-soft p-6 w-72 md:w-80 flex flex-col">
+                  <div class="flex items-center gap-3 mb-4">
+                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center" style="background: rgba(110, 151, 196, 0.18);">
+                      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#6E97C4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                      </svg>
+                    </div>
+                    <div class="text-xs font-bold uppercase tracking-wider" style="color: var(--blue);">Tahap 01</div>
+                  </div>
+                  <h3 class="text-lg font-bold mb-2" style="color: var(--dark-gray);">Identifikasi Permasalahan</h3>
+                  <p class="text-sm flex-1" style="color: var(--med-gray); line-height: 1.7;">
+                    Melakukan studi literatur dan observasi mengenai kesulitan membaca pada siswa dengan gejala awal disleksia.
+                  </p>
+                </div>
+                <div class="flex items-center px-1">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#AFC6DB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="hidden md:block">
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                    <polyline points="12 5 19 12 12 19"/>
+                  </svg>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#AFC6DB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="md:hidden">
+                    <line x1="12" y1="5" x2="12" y2="19"/>
+                    <polyline points="19 12 12 19 5 12"/>
+                  </svg>
+                </div>
+              </div>
+              
+              <!-- Step 2 -->
+              <div class="flex items-stretch">
+                <div class="card-soft p-6 w-72 md:w-80 flex flex-col">
+                  <div class="flex items-center gap-3 mb-4">
+                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center" style="background: rgba(242, 235, 103, 0.25);">
+                      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B93C43" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="4 7 4 4 20 4 20 7"/>
+                        <line x1="9" y1="20" x2="15" y2="20"/>
+                        <line x1="12" y1="4" x2="12" y2="20"/>
+                      </svg>
+                    </div>
+                    <div class="text-xs font-bold uppercase tracking-wider" style="color: var(--dark-red);">Tahap 02</div>
+                  </div>
+                  <h3 class="text-lg font-bold mb-2" style="color: var(--dark-gray);">Pengembangan Typeface LexiClear</h3>
+                  <p class="text-sm flex-1" style="color: var(--med-gray); line-height: 1.7;">
+                    Merancang typeface manuscript yang mengutamakan keterbacaan berdasarkan karakteristik tipografi.
+                  </p>
+                </div>
+                <div class="flex items-center px-1">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#AFC6DB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="hidden md:block">
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                    <polyline points="12 5 19 12 12 19"/>
+                  </svg>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#AFC6DB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="md:hidden">
+                    <line x1="12" y1="5" x2="12" y2="19"/>
+                    <polyline points="19 12 12 19 5 12"/>
+                  </svg>
+                </div>
+              </div>
+              
+              <!-- Step 3 -->
+              <div class="flex items-stretch">
+                <div class="card-soft p-6 w-72 md:w-80 flex flex-col">
+                  <div class="flex items-center gap-3 mb-4">
+                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center" style="background: rgba(60, 171, 110, 0.18);">
+                      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3CAB6E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 2h6v4l4 8a4 4 0 0 1-4 6H9a4 4 0 0 1-4-6l4-8V2z"/>
+                        <line x1="7" y1="16" x2="17" y2="16"/>
+                      </svg>
+                    </div>
+                    <div class="text-xs font-bold uppercase tracking-wider" style="color: var(--green);">Tahap 03</div>
+                  </div>
+                  <h3 class="text-lg font-bold mb-2" style="color: var(--dark-gray);">Pengujian Typeface</h3>
+                  <p class="text-sm flex-1" style="color: var(--med-gray); line-height: 1.7;">
+                    Membandingkan performa membaca menggunakan typeface manuscript dan semi-cursive pada siswa dengan gejala awal disleksia.
+                  </p>
+                </div>
+                <div class="flex items-center px-1">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#AFC6DB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="hidden md:block">
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                    <polyline points="12 5 19 12 12 19"/>
+                  </svg>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#AFC6DB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="md:hidden">
+                    <line x1="12" y1="5" x2="12" y2="19"/>
+                    <polyline points="19 12 12 19 5 12"/>
+                  </svg>
+                </div>
+              </div>
+              
+              <!-- Step 4 -->
+              <div class="flex items-stretch">
+                <div class="card-soft p-6 w-72 md:w-80 flex flex-col">
+                  <div class="flex items-center gap-3 mb-4">
+                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center" style="background: rgba(236, 160, 143, 0.22);">
+                      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ECA08F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="20" x2="18" y2="10"/>
+                        <line x1="12" y1="20" x2="12" y2="4"/>
+                        <line x1="6" y1="20" x2="6" y2="14"/>
+                      </svg>
+                    </div>
+                    <div class="text-xs font-bold uppercase tracking-wider" style="color: var(--dark-red);">Tahap 04</div>
+                  </div>
+                  <h3 class="text-lg font-bold mb-2" style="color: var(--dark-gray);">Analisis Data</h3>
+                  <p class="text-sm flex-1" style="color: var(--med-gray); line-height: 1.7;">
+                    Menganalisis hasil penelitian menggunakan pendekatan statistik untuk mengetahui perbedaan kemampuan membaca pada kedua jenis typeface.
+                  </p>
+                </div>
+                <div class="flex items-center px-1">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#AFC6DB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="hidden md:block">
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                    <polyline points="12 5 19 12 12 19"/>
+                  </svg>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#AFC6DB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="md:hidden">
+                    <line x1="12" y1="5" x2="12" y2="19"/>
+                    <polyline points="19 12 12 19 5 12"/>
+                  </svg>
+                </div>
+              </div>
+              
+              <!-- Step 5 -->
+              <div class="flex items-stretch">
+                <div class="card-soft p-6 w-72 md:w-80 flex flex-col">
+                  <div class="flex items-center gap-3 mb-4">
+                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center" style="background: rgba(175, 198, 219, 0.25);">
+                      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#6E97C4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                      </svg>
+                    </div>
+                    <div class="text-xs font-bold uppercase tracking-wider" style="color: var(--blue);">Tahap 05</div>
+                  </div>
+                  <h3 class="text-lg font-bold mb-2" style="color: var(--dark-gray);">Penyusunan Buku</h3>
+                  <p class="text-sm flex-1" style="color: var(--med-gray); line-height: 1.7;">
+                    Mengimplementasikan typeface LexiClear ke dalam buku belajar membaca yang disusun menggunakan Metode Suku Kata.
+                  </p>
+                </div>
+                <div class="flex items-center px-1">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#AFC6DB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="hidden md:block">
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                    <polyline points="12 5 19 12 12 19"/>
+                  </svg>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#AFC6DB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="md:hidden">
+                    <line x1="12" y1="5" x2="12" y2="19"/>
+                    <polyline points="19 12 12 19 5 12"/>
+                  </svg>
+                </div>
+              </div>
+              
+              <!-- Step 6 -->
+              <div class="flex items-stretch">
+                <div class="card-soft p-6 w-72 md:w-80 flex flex-col">
+                  <div class="flex items-center gap-3 mb-4">
+                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center" style="background: rgba(136, 169, 138, 0.22);">
+                      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#88A98A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                        <line x1="8" y1="21" x2="16" y2="21"/>
+                        <line x1="12" y1="17" x2="12" y2="21"/>
+                      </svg>
+                    </div>
+                    <div class="text-xs font-bold uppercase tracking-wider" style="color: var(--sage);">Tahap 06</div>
+                  </div>
+                  <h3 class="text-lg font-bold mb-2" style="color: var(--dark-gray);">Website Pendamping</h3>
+                  <p class="text-sm flex-1" style="color: var(--med-gray); line-height: 1.7;">
+                    Mengembangkan website sebagai media pendamping yang menyediakan audio pelafalan serta informasi mengenai buku dan LexiClear.
+                  </p>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+          
+          <!-- Scroll hint -->
+          <div class="flex items-center justify-center gap-2 mt-6 text-sm" style="color: var(--med-gray);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"/>
+              <polyline points="9 18 3 12 9 6" transform="translate(-2 0)"/>
+            </svg>
+            <span class="md:hidden">Geser untuk melihat semua tahap</span>
+            <span class="hidden md:block">Scroll untuk melihat semua tahap</span>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+    
+  </main>
+  
+  <!-- Footer -->
+  <footer style="background: var(--dark-gray);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+      
+      <!-- Ubah grid menjadi 3 kolom di desktop, 2 kolom di tablet, dan 1 kolom di HP -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
+        
+        <!-- Brand -->
+        <div class="md:col-span-2 lg:col-span-1 text-center md:text-left">
+          <div class="flex items-center gap-2.5 mb-4 justify-center md:justify-start">
+            <div class="w-10 h-10 rounded-2xl flex items-center justify-center" style="background: linear-gradient(135deg, var(--blue), var(--green));">
+              <span class="text-white font-bold text-lg" style="font-family: 'Fredoka', sans-serif;">A</span>
+            </div>
+            <div>
+              <div class="font-bold text-base leading-tight text-white" style="font-family: 'Fredoka', sans-serif;">Aku Bisa Membaca</div>
+              <div class="text-xs leading-tight" style="color: rgba(255,255,255,0.6);">Belajar Membaca Secara Bertahap</div>
+            </div>
+          </div>
+          <p class="text-sm leading-relaxed max-w-xs mx-auto md:mx-0" style="color: rgba(255,255,255,0.6);">
+            Media pendamping buku belajar membaca dengan Metode Suku Kata dan typeface LexiClear.
+          </p>
+        </div>
+        
+        <!-- Penyusun -->
+        <div class="text-center md:text-left">
+          <div class="text-xs font-bold uppercase tracking-wider mb-3" style="color: var(--yellow);">Penyusun</div>
+          <div class="space-y-2">
+            <div class="text-sm font-bold text-white">Ilham Fathul Arifin</div>
+            <div class="text-sm font-bold text-white">Dian Rinjani, S.Pd., M.Ds.</div>
+            <div class="text-sm font-bold text-white">Nurhidayatulloh, S.Pd., M.T.</div>
+          </div>
+        </div>
+        
+        <!-- Institusi & Kontak -->
+        <div class="md:col-span-2 lg:col-span-1 text-center md:text-left">
+          <div class="text-xs font-bold uppercase tracking-wider mb-3" style="color: var(--soft-blue);">Institusi</div>
+          <div class="text-sm font-bold text-white mb-1">Pendidikan Multimedia, Universitas Pendidikan Indonesia</div>
+          <div class="text-sm mb-4" style="color: rgba(255,255,255,0.6);">2026</div>
+          
+          <div class="text-xs font-bold uppercase tracking-wider mb-2" style="color: var(--soft-blue);">Email</div>
+          <a href="mailto:akubisamembaca@upi.edu" class="text-sm font-bold inline-flex items-center gap-2 transition-colors hover:opacity-80 justify-center md:justify-start" style="color: var(--yellow);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            ilhamfathul53@gmail.com
+          </a>
+        </div>
+        
+      </div>
+      
+      <!-- Divider -->
+      <div class="border-t pt-6" style="border-color: rgba(255,255,255,0.1);">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-3 text-center md:text-left">
+          <div class="text-sm" style="color: rgba(255,255,255,0.5);">
+            Copyright © 2026 Aku Bisa Membaca. All rights reserved.
+          </div>
+          <div class="flex items-center gap-4 text-sm" style="color: rgba(255,255,255,0.5);">
+            <span>Typeface LexiClear</span>
+            <span>•</span>
+            <span>Metode Suku Kata</span>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </footer>
+  
+  <!-- Toast container -->
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 px-6 py-3 rounded-full text-sm font-bold opacity-0 pointer-events-none transition-all duration-300 z-50" style="background: var(--dark-gray); color: white; transform: translate(-50%, 100px);">
+    Audio sedang diputar
+  </div>
+  
+  <script>
+    // ==================== MATERI DATA ====================
+    const materiData = {
+      vokal: {
+        title: "Huruf Vokal",
+        items: [
+          { text: "A", example: "A - Apel", speak: "A" },
+          { text: "I", example: "I - Ikan", speak: "I" },
+          { text: "U", example: "U - Unta", speak: "U" },
+          { text: "E", example: "E - Elang", speak: "E" },
+          { text: "O", example: "O - Obor", speak: "O" }
+        ]
+      },
+      konsonan: {
+        title: "Huruf Konsonan",
+        items: [
+          { text: "B", example: "B - Bola", speak: "B" },
+          { text: "C", example: "C - Cicak", speak: "C" },
+          { text: "D", example: "D - Domba", speak: "D" },
+          { text: "G", example: "G - Gajah", speak: "G" },
+          { text: "H", example: "H - Harimau", speak: "H" },
+          { text: "J", example: "J - Jeruk", speak: "J" },
+          { text: "K", example: "K - Kucing", speak: "K" },
+          { text: "L", example: "L - Lebah", speak: "L" },
+          { text: "M", example: "M - Mangga", speak: "M" },
+          { text: "N", example: "N - Nanas", speak: "N" },
+          { text: "P", example: "P - Pisang", speak: "P" },
+          { text: "R", example: "R - Roti", speak: "R" },
+          { text: "S", example: "S - Sapi", speak: "S" },
+          { text: "T", example: "T - Topi", speak: "T" },
+          { text: "W", example: "W - Wortel", speak: "W" },
+          { text: "X", example: "X - Xilofon", speak: "X" },
+          { text: "Y", example: "Y - Yoyo", speak: "Y" },
+          { text: "Z", example: "Z - Zebra", speak: "Z" },
+        ]
+      },
+      suku: {
+        title: "Suku Kata",
+        items: [
+          { text: "ba", example: "ba - bu - ba", speak: "ba" },
+          { text: "bi", example: "bi - bih", speak: "bi" },
+          { text: "bu", example: "bu - bung", speak: "bu" },
+          { text: "ca", example: "ca - cap", speak: "ca" },
+          { text: "ci", example: "ci - cic", speak: "ci" },
+          { text: "da", example: "da - das", speak: "da" },
+          { text: "di", example: "di - din", speak: "di" },
+          { text: "ka", example: "ka - kaki", speak: "ka" },
+          { text: "ki", example: "ki - kipas", speak: "ki" },
+          { text: "la", example: "la - lap", speak: "la" },
+          { text: "ma", example: "ma - makan", speak: "ma" },
+          { text: "na", example: "na - najis", speak: "na" },
+          { text: "pa", example: "pa - pagi", speak: "pa" },
+          { text: "sa", example: "sa - sapi", speak: "sa" },
+          { text: "ta", example: "ta - tangan", speak: "ta" }
+        ]
+      },
+      kata: {
+        title: "Kata",
+        items: [
+          { text: "buku", example: "bu - ku", speak: "buku" },
+          { text: "meja", example: "me - ja", speak: "meja" },
+          { text: "rumah", example: "ru - mah", speak: "rumah" },
+          { text: "sekolah", example: "se - ko - lah", speak: "sekolah" },
+          { text: "guru", example: "gu - ru", speak: "guru" },
+          { text: "murid", example: "mu - rid", speak: "murid" },
+          { text: "matahari", example: "ma - ta - ha - ri", speak: "matahari" },
+          { text: "makanan", example: "ma - ka - nan", speak: "makanan" }
+        ]
+      },
+      kalimat: {
+        title: "Kalimat",
+        items: [
+          { text: "Ibu membaca buku.", example: "I-bu mem-ba-ca bu-ku", speak: "Ibu membaca buku" },
+          { text: "Ayah pergi ke kantor.", example: "A-yah per-gi ke kan-tor", speak: "Ayah pergi ke kantor" },
+          { text: "Aku suka makan nasi.", example: "A-ku su-ka ma-kan na-si", speak: "Aku suka makan nasi" },
+          { text: "Budi bermain bola.", example: "Bu-di ber-main bo-la", speak: "Budi bermain bola" },
+          { text: "Kucing minum susu.", example: "Ku-cing mi-num su-su", speak: "Kucing minum susu" }
+        ]
+      },
+      cerita: {
+        title: "Cerita Pendek",
+        items: [
+          { 
+            text: "Pagi ini, Budi pergi ke sekolah. Ia belajar membaca bersama Ibu Guru. Budi senang karena sudah bisa membaca buku.", 
+            example: "Cerita tentang Budi", 
+            speak: "Pagi ini, Budi pergi ke sekolah. Ia belajar membaca bersama Ibu Guru. Budi senang karena sudah bisa membaca buku." 
+          },
+          { 
+            text: "Sari suka berkebun. Di halaman rumah, Sari menanam bunga dan sayuran. Setiap pagi, Sari menyiram tanamannya dengan riang.", 
+            example: "Cerita tentang Sari", 
+            speak: "Sari suka berkebun. Di halaman rumah, Sari menanam bunga dan sayuran. Setiap pagi, Sari menyiram tanamannya dengan riang." 
+          },
+          { 
+            text: "Seekor kucing kecil duduk di atas meja. Kucing itu melihat seekor kupu-kupu. Kucing mengejar kupu-kupu itu ke taman.", 
+            example: "Cerita tentang kucing", 
+            speak: "Seekor kucing kecil duduk di atas meja. Kucing itu melihat seekor kupu-kupu. Kucing mengejar kupu-kupu itu ke taman." 
+          }
+        ]
+      }
+    };
+    
+    // ==================== STATE ====================
+    let currentTab = 'vokal';
+    let currentIndex = 0;
+    let isPlaying = false;
+    
+    // ==================== ELEMENTS ====================
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const materiContent = document.getElementById('materiContent');
+    const materiCategory = document.getElementById('materiCategory');
+    const materiProgress = document.getElementById('materiProgress');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const audioBtn = document.getElementById('audioBtn');
+    const audioBtnText = document.getElementById('audioBtnText');
+    const soundWave = audioBtn.querySelector('.sound-wave');
+    
+    // ==================== RENDER ====================
+    function renderMateri() {
+      const data = materiData[currentTab];
+      const item = data.items[currentIndex];
+      
+      materiCategory.textContent = data.title;
+      
+      // Determine font size based on content length
+      let fontSize = 'text-[10rem] md:text-[14rem]';
+      if (currentTab === 'kata') fontSize = 'text-6xl md:text-8xl';
+      if (currentTab === 'kalimat') fontSize = 'text-3xl md:text-5xl';
+      if (currentTab === 'cerita') fontSize = 'text-xl md:text-2xl';
+      
+      // Render content
+      if (currentTab === 'cerita') {
+        materiContent.innerHTML = `
+          <div class="max-w-2xl mx-auto px-4">
+            <p class="big-letter ${fontSize} mb-4">${item.text}</p>
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full" style="background: rgba(242, 235, 103, 0.25);">
+              <span class="text-sm font-bold" style="color: var(--dark-red);">${item.example}</span>
+            </div>
+          </div>
+        `;
+      } else if (currentTab === 'kalimat') {
+        materiContent.innerHTML = `
+          <p class="big-letter ${fontSize} mb-4">${item.text}</p>
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full" style="background: rgba(136, 169, 138, 0.18);">
+            <span class="text-sm font-bold" style="color: var(--sage);">${item.example}</span>
+          </div>
+        `;
+      } else if (currentTab === 'kata') {
+        materiContent.innerHTML = `
+          <p class="big-letter ${fontSize} mb-4">${item.text}</p>
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full" style="background: rgba(175, 198, 219, 0.25);">
+            <span class="text-sm font-bold" style="color: var(--blue);">${item.example}</span>
+          </div>
+        `;
+      } else {
+        materiContent.innerHTML = `
+          <p class="big-letter ${fontSize} mb-4">${item.text}</p>
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full" style="background: rgba(242, 235, 103, 0.25);">
+            <span class="text-sm font-bold" style="color: var(--dark-red);">${item.example}</span>
+          </div>
+        `;
+      }
+      
+      // Render progress dots
+      materiProgress.innerHTML = '';
+      data.items.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.className = 'progress-dot' + (i === currentIndex ? ' active' : '');
+        materiProgress.appendChild(dot);
+      });
+      
+      // Update nav buttons
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.disabled = currentIndex === data.items.length - 1;
+      
+      // Reset audio state
+      stopAudio();
+    }
+    
+    // ==================== AUDIO ====================
+    function speak(text) {
+      if (!('speechSynthesis' in window)) {
+        showToast('Maaf, browser Anda tidak mendukung audio pelafalan');
+        return;
+      }
+      
+      window.speechSynthesis.cancel();
+      
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'id-ID';
+      utterance.rate = 0.75;
+      utterance.pitch = 1.1;
+      utterance.volume = 1;
+      
+      utterance.onstart = () => {
+        isPlaying = true;
+        audioBtn.classList.add('playing');
+        audioBtnText.textContent = 'Sedang Memutar';
+        soundWave.style.display = 'inline-flex';
+      };
+      
+      utterance.onend = () => {
+        stopAudio();
+      };
+      
+      utterance.onerror = () => {
+        stopAudio();
+      };
+      
+      window.speechSynthesis.speak(utterance);
+    }
+    
+    function stopAudio() {
+      isPlaying = false;
+      audioBtn.classList.remove('playing');
+      audioBtnText.textContent = 'Dengarkan Pelafalan';
+      soundWave.style.display = 'none';
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+    }
+    
+    audioBtn.addEventListener('click', () => {
+      if (isPlaying) {
+        stopAudio();
+      } else {
+        const item = materiData[currentTab].items[currentIndex];
+        speak(item.speak);
+      }
+    });
+    
+    // ==================== NAVIGATION ====================
+    prevBtn.addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        renderMateri();
+      }
+    });
+    
+    nextBtn.addEventListener('click', () => {
+      const data = materiData[currentTab];
+      if (currentIndex < data.items.length - 1) {
+        currentIndex++;
+        renderMateri();
+      }
+    });
+    
+    // ==================== TABS ====================
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentTab = btn.dataset.tab;
+        currentIndex = 0;
+        renderMateri();
+      });
+    });
+    
+    // ==================== KEYBOARD NAVIGATION ====================
+    document.addEventListener('keydown', (e) => {
+      // Only respond if materi section is likely in view
+      const materiSection = document.getElementById('materi');
+      const rect = materiSection.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight && rect.bottom > 0;
+      
+      if (!inView) return;
+      
+      if (e.key === 'ArrowLeft' && !prevBtn.disabled) {
+        prevBtn.click();
+      } else if (e.key === 'ArrowRight' && !nextBtn.disabled) {
+        nextBtn.click();
+      } else if (e.key === ' ' || e.key === 'Enter') {
+        if (document.activeElement === audioBtn || document.activeElement === document.body) {
+          e.preventDefault();
+          audioBtn.click();
+        }
+      }
+    });
+    
+    // ==================== TOAST ====================
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.style.opacity = '1';
+      toast.style.transform = 'translate(-50%, 0)';
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translate(-50%, 100px)';
+      }, 3000);
+    }
+    
+    // ==================== MOBILE MENU ====================
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+    
+    // Close mobile menu when link is clicked
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+      });
+    });
+    
+    // ==================== REVEAL ON SCROLL ====================
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    
+    document.querySelectorAll('.reveal').forEach(el => {
+      revealObserver.observe(el);
+    });
+    
+    // ==================== ACTIVE NAV LINK ====================
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          navLinks.forEach(link => {
+            link.style.color = '';
+            link.style.background = '';
+            if (link.getAttribute('href') === '#' + id) {
+              link.style.color = 'var(--blue)';
+              link.style.background = 'rgba(110, 151, 196, 0.12)';
+            }
+          });
+        }
+      });
+    }, { threshold: 0.3 });
+    
+    sections.forEach(section => navObserver.observe(section));
+    
+    // ==================== INIT ====================
+    renderMateri();
+    
+    // Stop audio when leaving page
+    window.addEventListener('beforeunload', () => {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+    });
+    
+  </script>
+</body>
+</html>
