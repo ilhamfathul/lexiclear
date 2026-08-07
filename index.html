@@ -9,10 +9,30 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preload" href="./LexiClear-Regular.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="./LexiClear-Bold.woff" as="font" type="font/woff" crossorigin>
   
   <script src="https://cdn.tailwindcss.com"></script>
   
   <style>
+    
+    /* LexiClear webfont */
+    @font-face {
+      font-family: 'LexiClear';
+      src: url('./LexiClear-Regular.woff') format('woff');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'LexiClear';
+      src: url('./LexiClear-Bold.woff') format('woff');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
     :root {
       --cream: #F6F0DE;
       --blue: #6E97C4;
@@ -242,8 +262,9 @@
     
     /* Big letter display */
     .big-letter {
-      font-family: 'LexiClear', 'Fredoka', sans-serif;
-      font-weight: normal; /* Font manual biasanya tidak support weight 700 */
+      font-family: 'LexiClear', sans-serif;
+      font-weight: 400;
+      font-synthesis: none;
       line-height: 1;
       color: var(--dark-gray);
     }
@@ -308,8 +329,10 @@
     }
     
     /* Type specimen */
-     .type-specimen {
-      font-family: 'LexiClear', 'Fredoka', sans-serif;
+    .type-specimen {
+      font-family: 'LexiClear', sans-serif;
+      font-weight: 400;
+      font-synthesis: none;
       letter-spacing: 0.02em;
     }
     
