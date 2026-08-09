@@ -315,17 +315,19 @@
       outline: 3px solid var(--blue);
       outline-offset: 3px;
       border-radius: 4px;
-    }
-    
+    }    
     /* Mobile menu */
     .mobile-menu {
+      width: 100%;
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.4s ease;
+      border-top: 1px solid transparent;
     }
-    
+
     .mobile-menu.open {
       max-height: 400px;
+      border-top-color: rgba(232, 232, 232, 0.6);
     }
     
     /* Type specimen */
@@ -409,7 +411,7 @@
         </div>
         
           <!-- Bagian Kanan (Tombol Mulai Belajar + Logo Institusi) -->
-        <div class="flex items-center gap-1 sm:gap-2 md:gap-10">
+        <div class="ml-auto flex items-center gap-1.5 sm:gap-2 md:gap-10 shrink-0">
           
           <!-- Tombol Mulai Belajar (Desktop) -->
           <a href="#materi" class="hidden lg:inline-flex btn btn-primary text-sm" style="padding: 0.625rem 1.5rem;">
@@ -433,7 +435,7 @@
           </div>
           
           <!-- Tombol Menu Mobile -->
-          <button id="mobileMenuBtn" class="lg:hidden p-2 rounded-xl" style="color: var(--dark-gray);" aria-label="Buka menu">
+          <button id="mobileMenuBtn" class="lg:hidden order-2 p-2 rounded-xl shrink-0" style="color: var(--dark-gray);" aria-label="Buka menu">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
               <line x1="4" y1="7" x2="20" y2="7"/>
               <line x1="4" y1="12" x2="20" y2="12"/>
@@ -444,7 +446,7 @@
         </div>
       
       <!-- Mobile Menu -->
-      <div id="mobileMenu" class="mobile-menu lg:hidden">
+      <div id="mobileMenu" class="mobile-menu lg:hidden w-full">
         <div class="py-3 space-y-1">
           <a href="#beranda" class="nav-link block">Beranda</a>
           <a href="#materi" class="nav-link block">Materi</a>
@@ -1393,13 +1395,15 @@
     const mobileMenu = document.getElementById('mobileMenu');
     
     mobileMenuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('open');
+      const isOpen = mobileMenu.classList.toggle('open');
+      mobileMenuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
     
     // Close mobile menu when link is clicked
     mobileMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         mobileMenu.classList.remove('open');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
       });
     });
     
